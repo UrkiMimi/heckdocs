@@ -1,5 +1,7 @@
 # Environment Enhancements
 
+From simply removing a logo to creating completely hand modelled scenes, Chroma does it all with its environment tools.
+
 !!! tip
     Set `#!json "PrintEnvironmentEnhancementDebug": true` in the `Chroma.json` config file to print extra environment enhancement information to your console.
 
@@ -9,9 +11,8 @@ Environments are modified by a list of "commands" in the `"environment"` array. 
 
 *  `#!json "customData"` -> `#!json "environment"` (array)
     *  `#!json "id": string` The ID to use when looking up the GameObject.
-    *  `#!json "lookupMethod": Regex, Exact, Contains, StartsWith, EndsWith` How to use the ID to search. NOTE: Regex will cause the longest load times, but does allow for the greatest control.
-    *  `#!json "duplicate": int` How many instances of this GameObject to duplicate. Note: this changes the scope and all the following properties will affect the duplicated objects instead.
-    *  `#!json "components": object`: See below.
+    *  `#!json "lookupMethod": Regex, Exact, Contains, StartsWith, EndsWith` How to use the ID to search. Regex allows for the greatest control, such as future-proofing by using wildcards.
+    *  `#!json "duplicate": int` How many instances of this GameObject to duplicate. This changes the scope of the command and all the following properties will affect the duplicated objects instead.
     *  `#!json "active": bool` When false, disables the GameObject.
     *  `#!json "scale": [x, y, z]` (floats) Sets scale of GameObject.
     *  `#!json "position": [x, y, z]` (floats) Sets position of GameObject.
@@ -19,6 +20,7 @@ Environments are modified by a list of "commands" in the `"environment"` array. 
     *  `#!json "rotation": [x, y, z]` (floats) Sets rotation of GameObject.
     *  `#!json "localRotation": [x, y, z]` (floats) Sets localRotation of GameObject.
     *  `#!json "track": string` Adds the object to a track, allowing you to animate it. See [TransformController](#transformcontroller)
+    *  `#!json "components": object`: See below.
 
 All of the custom data is stored in the difficulty's json.
 !!! example
@@ -78,7 +80,7 @@ Any GameObject assigned a track will automatically be assigned a `TransformContr
     Because `position` and `localPosition` both control position (and similiarly for rotation), only one of them can be set. If you attempt to set both at the same time, only `localPosition` will be set.
 
 ## Geometry
-Tired of only being able to move existing objects? Geometry allows you to create your own primitive shapes. Instead of defining `"id"` and `"lookupMethod"`, use `"geometry"`.
+*Tired of only being able to move existing objects?* **Geometry** allows you to create your own primitive shapes. Instead of defining `"id"` and `"lookupMethod"`, use `"geometry"`.
 Example:
 ```json
 "version": "3.0.0",
@@ -116,7 +118,7 @@ Example:
 !!! tip
     Every object needs a material, however creating materials can be laggy! The best way to assign materials is to create one initially, and then reuse it whenever you need one. It is recommended you reuse materials whenever possible as it is the most performant way of creating many geometry objects.
     !!! example
-        ```json
+        ```json hl_lines="12 19"
         "customData": {
           "materials": {
             "green standard": {

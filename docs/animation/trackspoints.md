@@ -3,7 +3,7 @@
 Tracks and points are integral to Heck's animation systems and are used for animating anything using Heck.
 
 ## Tracks
-Tracks are a powerful tool integrated by Heck that allow you to group objects together and control them.
+**Tracks** are a powerful tool integrated by Heck that allow you to group objects together and control them.
 
 `track` is a string property in the `customData` of the object you want to give said track to. It can be placed on any object in the `obstacles`, `colorNotes`, `bombNotes`, `sliders`, or `burstSliders` arrays. An object can belong to multiple tracks at the same time, and be affected by multiple track animations or path animations concurrently.
 
@@ -25,7 +25,7 @@ Tracks are a powerful tool integrated by Heck that allow you to group objects to
     ```
 
 ## Point Definitions
-Point definitions are used to describe what happens over the course of an animation, they are used **slightly differently for different properties.** They consist of a collection of points over time.
+**Point definitions** are used to describe what happens over the course of an animation, they are used *slightly differently for different properties*. They consist of a collection of points over time.
 
 Here is an example of one being defined to animate [`offsetPosition`](AnimationProperties/#offsetPosition): (See: [AnimateTrack](#animatetrack))
 ```json
@@ -62,7 +62,7 @@ A point definition usually follows the pattern of `[data, time, "optional easing
     ```
 Point definitions can also be defined inside the `pointDefinitions` field of your `customData`, any point definition defined here can be called via their property name when one would fit.
 ??? example
-    ```json
+    ```json hl_lines="19"
     {
       "version": "3.0.0",
       "customData": {
@@ -113,7 +113,7 @@ When a point definition is used, input time values outside of the defined points
     ```
 
 !!! tip
-    If you only require one element in your point definition, instead of a list of points, your point definition can just be your point.
+    If you only require one element in your point definition, instead of a list of points, your point definition can just be your point. Heck will automatically add a time of 0 for you.
     ```json
     // These are equivalent
     "offsetPosition": [[245, 23, 54, 0]]
@@ -121,14 +121,14 @@ When a point definition is used, input time values outside of the defined points
     ```
 
 ### Path Animation
-"Path animations" define how an object is animated over its own individual lifetime. For path animations, the time value of the point definition is the point each object on the track is at in its individual life span.
+**Path animations**"** define how an object is animated over its own individual lifetime. For path animations, the time value of the point definition is the point each object on the track is at in its individual life span.
 
 Meaning a point with time `0` would be right when the object finishes jumping in, a point with time `0.5` would be when the object reaches the player, at `0.75`, walls and notes will begin their despawn animation and start flying away very quickly, and `1` being right when the object despawns.
 
 ![thanksbullet](/assets/animation/pathanimationpoints.png)
 
 !!! note
-    Objects CANNOT be animated while they are in their jumping animation. During that time, they will instead strictly use the first point in the point definition.
+    Objects cannot be animated while they are in their jumping animation. During that time, they will instead strictly use the first point in the point definition.
 
 #### Individual path animations
 Path animations can individual be assigned to an object by adding the `animation` data in the `customData`.
@@ -172,7 +172,7 @@ These custom events are the primary ways of animate tracks.
 }
 ```
 
-`AnimateTrack` will animate the properties of everything on the track at the same time. The animation will go through the point definition over the course of `duration`. 
+**`AnimateTrack`** will animate the properties of everything on the track at the same time. The animation will go through the point definition over the course of `duration`. 
 
 Attempting to animate a property which is already being animated will stop the overwritten `AnimateTrack`. However, multiple `AnimateTrack` events may animate separate properties at the same time, i.e. one `AnimateTrack` could animate position over 10 beats while another `AnimateTrack` animates rotation over 5 beats.
 
@@ -213,7 +213,7 @@ Although not recommended, properties can be set to `null` to "erase" a track's p
   }
 }
 ```
-`AssignPathAnimation` will assign a "path animation" to all the objects on the track(s). 
+**`AssignPathAnimation`** will assign a "path animation" to all the objects on the track(s). 
 
 The duration and easing on the event additionally allows you to transition smoothly between paths.
 
@@ -237,7 +237,7 @@ Although not recommended, path properties can be set to `null` to "erase" a trac
 
 ### Modifiers
 
-Modifiers allow you to do basic arithmetic on points. How these modifiers interact can be defined using operations, all of which are done componentwise. These include:
+**Modifiers** are added at the end of points to allow you to do basic arithmetic on points. How these modifiers interact can be defined using *operations*, all of which are done componentwise. These include:
 
 - `opNone`
 - `opAdd`
@@ -245,15 +245,42 @@ Modifiers allow you to do basic arithmetic on points. How these modifiers intera
 - `opMul`
 - `opDiv`
 
-The true value of modifiers are useful when using base properties which allow referencing some provided values which updates dynamically. This allows for things like following the HMD or setting an object's color to the player's note color. All base properties start with the 'base' prefix.
 !!! example
+    Modifiers can perform basic arithmetic.
     ```json
     {
       "b": -1,
       "t": "AnimateTrack",
       "d": {
         "track": "tutorialnote0",
-        "color": ["baseNote0Color", [ 0.4, 0.4, 0.4, 1, "opMul"]] // take the color of left hand notes, and multiply the the rgb values by 0.4.
+        "dissolve": [1.5, [2, "opMul"]] // 3
+      }
+    }
+    ```
+    A point can also have multiple modifiers and modifiers be chained to specify your order of operations.
+    ```json
+    {
+      "b": -1,
+      "t": "AnimateTrack",
+      "d": {
+        "track": "tutorialnote0",
+        "dissolve": [1.5, [2, "opMul", [1, "opSub"]], [4, "opAdd"]] // 5.5
+      }
+    }
+    ```
+
+The true value of modifiers are useful when using **base properties** which allow referencing some provided values which updates dynamically. This allows for things like following the HMD or setting an object's color to the player's note color. All base properties start with the 'base' prefix.
+!!! example
+    The first event takes the color of left hand notes, then multiplies their rgb values by 0.4.
+
+    The second event just uses the right hand note color.
+    ```json
+    {
+      "b": -1,
+      "t": "AnimateTrack",
+      "d": {
+        "track": "tutorialnote0",
+        "color": ["baseNote0Color", [ 0.4, 0.4, 0.4, 1, "opMul"]]
       }
     },
     {
@@ -261,16 +288,18 @@ The true value of modifiers are useful when using base properties which allow re
       "t": "AnimateTrack",
       "d": {
         "track": "tutorialnote1",
-        "color": ["baseNote1Color"] // just use the right hand note color.
+        "color": ["baseNote1Color"]
       }
-    },
+    }
     ```
 #### Bases
+
+Base properties represent a set amount of values and are continously updated.
 
 Bases will only evaluate when their value is grabbed.
 
 !!! example
-    ```json
+    ```json hl_lines="6 15"
     {
       "b": 5,
       "t": "AnimateTrack",
@@ -288,53 +317,53 @@ Bases will only evaluate when their value is grabbed.
         "duration": 999, // will continue to follow the head's rotation for 999 beats.
         "localRotation": ["baseHeadRotation"]
       }
-    },
+    }
     ```
 
 Player Transform
 
-- `baseHeadPosition`
-- `baseHeadLocalPosition`
-- `baseHeadRotation`
-- `baseHeadLocalRotation`
-- `baseHeadLocalScale`
-- `baseLeftHandPosition`
-- `baseLeftHandLocalPosition`
-- `baseLeftHandRotation`
-- `baseLeftHandLocalRotation`
-- `baseLeftHandLocalScale`
-- `baseRightHandPosition`
-- `baseRightHandLocalPosition`
-- `baseRightHandRotation`
-- `baseRightHandLocalRotation`
-- `baseRightHandLocalScale`
+- `baseHeadPosition`: [x, y, z]
+- `baseHeadLocalPosition`: [x, y, z]
+- `baseHeadRotation`: [x, y, z]
+- `baseHeadLocalRotation`: [x, y, z]
+- `baseHeadLocalScale`: [x, y, z]
+- `baseLeftHandPosition`: [x, y, z]
+- `baseLeftHandLocalPosition`: [x, y, z]
+- `baseLeftHandRotation`: [x, y, z]
+- `baseLeftHandLocalRotation`: [x, y, z]
+- `baseLeftHandLocalScale`: [x, y, z]
+- `baseRightHandPosition`: [x, y, z]
+- `baseRightHandLocalPosition`: [x, y, z]
+- `baseRightHandRotation`: [x, y, z]
+- `baseRightHandLocalRotation`: [x, y, z]
+- `baseRightHandLocalScale`: [x, y, z]
 
 Color
 
-- `baseNote0Color`
-- `baseNote1Color`
-- `baseObstaclesColor`
-- `baseSaberAColor`
-- `baseSaberBColor`
-- `baseEnvironmentColor0`
-- `baseEnvironmentColor1`
-- `baseEnvironmentColorW`
-- `baseEnvironmentColor0Boost`
-- `baseEnvironmentColor1Boost`
-- `baseEnvironmentColorWBoost`
+- `baseNote0Color`: [x, y, z, w]
+- `baseNote1Color`: [x, y, z, w]
+- `baseObstaclesColor`: [x, y, z, w]
+- `baseSaberAColor`: [x, y, z, w]
+- `baseSaberBColor`: [x, y, z, w]
+- `baseEnvironmentColor0`: [x, y, z, w]
+- `baseEnvironmentColor1`: [x, y, z, w]
+- `baseEnvironmentColorW`: [x, y, z, w]
+- `baseEnvironmentColor0Boost`: [x, y, z, w]
+- `baseEnvironmentColor1Boost`: [x, y, z, w]
+- `baseEnvironmentColorWBoost`: [x, y, z, w]
 
 Scoring
 
-- `baseCombo`
-- `baseMultipliedScore`
-- `baseImmediateMaxPossibleMultipliedScore`
-- `baseModifiedScore`
-- `baseImmediateMaxPossibleModifiedScore`
-- `baseRelativeScore`
-- `baseMultiplier`
-- `baseEnergy`
-- `baseSongTime`
-- `baseSongLength`
+- `baseCombo`: [x]
+- `baseMultipliedScore`: [x]
+- `baseImmediateMaxPossibleMultipliedScore`: [x]
+- `baseModifiedScore`: [x]
+- `baseImmediateMaxPossibleModifiedScore`: [x]
+- `baseRelativeScore`: [x]
+- `baseMultiplier`: [x]
+- `baseEnergy`: [x]
+- `baseSongTime`: [x]
+- `baseSongLength`: [x]
 
 !!! tip
     You can get the current normalized song time by doing `["baseSongTime", [ "baseSongLength", "opDiv"]]`
@@ -345,7 +374,7 @@ You can pick and choose individual components of bases to use by using `.xyzw`. 
 
 Picking individual components of bases also allows using high dimension points in lower dimensional properties.
 !!! example
-    `baseHeadPosition` is three dimensional, and `dissolve` is one dimensional, but by using `.x`, we get a one dimensional point.
+    `baseHeadPosition` is three dimensional, and `dissolve` is one dimensional, but by using `.x`, we get a *one* dimensional point.
     ```json
     {
       "b": 5,
@@ -355,7 +384,33 @@ Picking individual components of bases also allows using high dimension points i
         "duration": 999,
         "dissolve": ["baseHeadPosition.x"]
       }
-    },
+    }
+    ```
+    It is also possible to *increase* a base's dimension.
+    ```json
+    {
+      "b": 5,
+      "t": "AnimateTrack",
+      "d": {
+        "track": "tutorialnote0",
+        "duration": 999,
+        "offsetPosition": ["baseCombo.xxx"]
+      }
+    }
+    ```
+
+Additionally these parts can be mixed and matched together to make complex points.
+!!! example
+    ```json
+    {
+      "b": 5,
+      "t": "AnimateTrack",
+      "d": {
+        "track": "tutorialnote0",
+        "duration": 999,
+        "color" : ["baseNote0Color", ["baseSongTime", "baseHeadPosition.zy", 1, "opMul"]]
+      }
+    }
     ```
 
 #### Smooth
@@ -373,7 +428,7 @@ Bases can be smoothed between frames by using the `.s[number]` syntax. Lower val
         "position": ["baseHeadPosition.s10"],
         "rotation": ["baseHeadRotation.s10"],
       }
-    },
+    }
     ```
 
 !!! tip

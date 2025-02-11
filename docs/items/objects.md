@@ -3,7 +3,7 @@
 Noodle Extensions and Chroma provide simple data you can add to any note or wall to change its properties.
 
 !!! example
-    ```json hl_lines="8-10"
+    ```json
     "colorNotes": [
       {
         "b": 8.0,
@@ -19,7 +19,7 @@ Noodle Extensions and Chroma provide simple data you can add to any note or wall
     ```
 
 !!! info
-    Internally, bombs are treated nearly identically as notes, and as such, bombs will be considered notes henceforth.
+    Internally, bombs are treated **nearly identically to notes**, and as such, bombs will be considered notes henceforth.
 
 ## Heck
 
@@ -31,10 +31,10 @@ Noodle Extensions and Chroma provide simple data you can add to any note or wall
 
 #### Fake Objects
 
-If you wish to create fake notes, that is notes that do not show up in the note/wall count and not count towards score in any way, you must place them in a separate array within `customData`. These arrays are called `fakeColorNotes`, `fakeBombNotes`, `fakeObstacles` and `fakeBurstSliders`.
+If you wish to create **fake notes** (notes that do not show up in the note count and not count towards score in any way), you must place them in a separate array within `customData`. These arrays are called `fakeColorNotes`, `fakeBombNotes`, `fakeObstacles` and `fakeBurstSliders`.
 
 !!! example
-    ```json hl_lines="2"
+    ```json
     "customData":{
       "fakeColorNotes": [
         {

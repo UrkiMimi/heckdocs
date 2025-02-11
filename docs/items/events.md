@@ -1,9 +1,9 @@
 # Lighting Events
 
-Not to be confused with custom events, these are vanilla lighting events that have extra data added to them.
+Not to be confused with custom events, these are *vanilla lighting events* that have extra data added to them.
 
 !!! example
-    ```json hl_lines="7-9"
+    ```json
     "basicBeatmapEvents":[
       {
         "b": 8.0,

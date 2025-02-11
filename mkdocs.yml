@@ -38,7 +38,6 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Settings Setter: settings.md
-  - Vivify: vivify.md
   - Modifying Existing Items:
     - Objects (Notes/Walls): items/objects.md
     - Lighting Events: items/events.md

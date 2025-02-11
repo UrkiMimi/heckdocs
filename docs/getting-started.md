@@ -23,7 +23,7 @@ All the extra JSON fields are powered by **[CustomJSONData](https://github.com/A
 
 `customData` fields allow adding additional arbitrary data to any existing objects, like notes/walls/lighting events.
 !!! example
-    ```json hl_lines="8-11"
+    ```json
     "colorNotes":[
       {
         "b": 8.0,
@@ -41,9 +41,9 @@ All the extra JSON fields are powered by **[CustomJSONData](https://github.com/A
 
 ### Custom Events
 
-Custom events are stored inside the `customEvents` field of your difficulty's `customData`. Not to be confused with vanilla lighting events with custom data added, these are entirely new events.
+**Custom events** are stored inside the `customEvents` field of your difficulty's `customData`. Not to be confused with vanilla lighting events with custom data added, these are entirely new events.
 !!! example
-    ```json hl_lines="4-13"
+    ```json
     {
       "version": "3.0.0",
       "customData": {

@@ -7,7 +7,7 @@ After creating a custom environment, they can be turned into a shareable standal
 
 ## Finding Custom Chroma Environments
 
-Other user's environments can be found in the heck discord in the #environments channel, feel free to share your own in there as well!
+Other user's environments can be found in the heck Discord in the #environments channel, feel free to share your own in there as well!
 
 ## Structure
 ``` { .json .copy }

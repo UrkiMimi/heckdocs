@@ -1,6 +1,6 @@
 # Settings Setter
 
-Annoyed by that one streamer who always play with static lights? Recommend they play your map with the correct settings using Heck!
+Annoyed by that one streamer who always play with static lights? Recommend they play your map with the correct settings using **Settings Setter™**!
 
 Additionally, other mod developers can add compatibility to have their mod integrate with settings setter as well. If the appropriate mod for which your setting comes from is not installed, Heck will skip over your setting.
  
@@ -14,7 +14,7 @@ Additionally, other mod developers can add compatibility to have their mod integ
 
 Custom data for settable settings is set in the info.dat.
 Example:
-```json hl_lines="15-26"
+```json
 {
   "_version": "2.0.0",
   "_songName": "NULCTRL MEISO FLIP",

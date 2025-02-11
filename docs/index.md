@@ -4,7 +4,7 @@
 
 ## what the heck!?
 
-heck refers to both the library that powers all these mods, and the collection of the mods that use it.
+**heck** refers to both the library that powers all these mods, and the collection of the mods that use it.
 
 These mods are all about giving the mapper more power to make amazing maps! These features range from moving walls around mid-flight, creating fake notes, and even coloring bombs, all on a pre-programmed path. Now, one can even import full custom scenes designed in the Unity editor. Together, these mods can be installed by a user and will activate on a map that requires these mods.
 
