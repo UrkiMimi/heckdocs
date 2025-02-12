@@ -25,7 +25,7 @@ Noodle Extensions and Chroma provide simple data you can add to any note or wall
 
 ### All Objects
 
-* `#!json "track": string/string[]` A single track or list of tracks that an object belongs to. Commonly used for animating groups of objects. Does nothing by itself.
+* `#!json "track": string/string[]` A single track or list of tracks that an object belongs to. Commonly used for animating groups of objects. Does nothing by itself. See [Tracks and Points](/animation/trackspoints).
 
 ## Noodle Extensions
 
@@ -82,7 +82,7 @@ If you wish to create **fake notes** (notes that do not show up in the note coun
         ```json5
         "coordinates": [null, 0] // will use the vanilla "x" instead
         ```
-        
+
     === "Missing value"
         ```json5 hl_lines="9"
         "coordinates": [2] // will use the vanilla "y" instead

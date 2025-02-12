@@ -2,7 +2,7 @@
 
 ![heck logo](/assets/firebunni.png)
 
-## what the heck!?
+*what the heck!?*
 
 **heck** refers to both the library that powers all these mods, and the collection of the mods that use it.
 

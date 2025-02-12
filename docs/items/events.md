@@ -25,7 +25,7 @@ Not to be confused with custom events, these are *vanilla lighting events* that 
 * `#!json "color": [r, g, b, a]` (floats) Array of RGB values (Alpha is optional and will default to 1 if not specified).
 * `#!json "easing": string` Any easing from [easings.net](https://easings.net) (with the addition of easeLinear and easeStep).
 * `#!json "lerpType": string` Lerp as `HSV` or `RGB`.![colorlerp](/assets/items/ColorLerp.png) (Courtesy of https://www.alanzucconi.com/2016/01/06/colour-interpolation/).
-  
+
 ### Laser Speed
 * `#!json "lockRotation": bool` Set to true and the event it is attached to will not reset laser rotations.
 * `#!json "speed": float` Identical to just setting value, but allows for decimals. Will overwrite value (Because the game will randomize laser position on anything other than value 0, a small trick you can do is set value to 1 and _preciseSpeed to 0, creating 0 speed lasers with a randomized position).

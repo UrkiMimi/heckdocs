@@ -3,7 +3,7 @@
 Annoyed by that one streamer who always play with static lights? Recommend they play your map with the correct settings using **Settings Setter™**!
 
 Additionally, other mod developers can add compatibility to have their mod integrate with settings setter as well. If the appropriate mod for which your setting comes from is not installed, Heck will skip over your setting.
- 
+
 !!! warning
     Although all settings are included for posterity's sake, it is *HIGHLY* recommended to only list settings you *NEED*, e.g. your map uses a lot of text and left handed mode needs to be disabled to not mirror your text. Keep it to the bare minimum!
 
@@ -13,41 +13,41 @@ Additionally, other mod developers can add compatibility to have their mod integ
     *  `setting name`: The name of your setting. See below for setting names.
 
 Custom data for settable settings is set in the info.dat.
-Example:
-```json
-{
-  "_version": "2.0.0",
-  "_songName": "NULCTRL MEISO FLIP",
-  ...
-  "_difficultyBeatmapSets": [
+!!! example
+    ```json
     {
-      "_beatmapCharacteristicName": "Standard",
-      "_difficultyBeatmaps": [
+      "_version": "2.0.0",
+      "_songName": "NULCTRL MEISO FLIP",
+      ...
+      "_difficultyBeatmapSets": [
         {
-          "_difficulty": "ExpertPlus",
-          "_difficultyRank": 9,
-          "_beatmapFilename": "ExpertPlusStandard.dat",
-          "_noteJumpMovementSpeed": 19,
-          "_customData": {
-            "_settings": {
-              "_playerOptions":{
-                "_leftHanded": true,
-                "_hideNoteSpawnEffect": false
-              },
-              "_graphics": {
-                "_mirrorGraphicsSettings": 0
-              },
-              "_chroma": {
-                "_disableEnvironmentEnhancements": true
+          "_beatmapCharacteristicName": "Standard",
+          "_difficultyBeatmaps": [
+            {
+              "_difficulty": "ExpertPlus",
+              "_difficultyRank": 9,
+              "_beatmapFilename": "ExpertPlusStandard.dat",
+              "_noteJumpMovementSpeed": 19,
+              "_customData": {
+                "_settings": {
+                  "_playerOptions":{
+                    "_leftHanded": true,
+                    "_hideNoteSpawnEffect": false
+                  },
+                  "_graphics": {
+                    "_mirrorGraphicsSettings": 0
+                  },
+                  "_chroma": {
+                    "_disableEnvironmentEnhancements": true
+                  }
+                }
               }
             }
-          }
+          ]
         }
       ]
     }
-  ]
-}
-```
+    ```
 
 ## Categories
 
@@ -67,7 +67,7 @@ These settings are implemented by default.
     * `#!json "_saberTrailIntensity": float`
     * `#!json "_noteJumpDurationTypeSettings": Dynamic, Static`
     * `#!json "_noteJumpFixedDuration": float` *Only available w/ "Static"*
-    * `#!json "_noteJumpStartBeatOffset": float` *Only available w/ "Dynamic"*, 
+    * `#!json "_noteJumpStartBeatOffset": float` *Only available w/ "Dynamic"*,
         * Close: `-0.5`
         * Closer: `-0.25`
         * Default: `0`

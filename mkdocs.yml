@@ -1,6 +1,6 @@
 site_name: modhcarts
 site_url: https://heck.aeroluna.dev/
-theme: 
+theme:
   name: material
   logo: assets/icon.png
   favicon: assets/favicon.ico
@@ -46,3 +46,8 @@ nav:
     - User Shared Environments: environment/usershared.md
   - Animation:
     - Tracks and Points: animation/trackspoints.md
+    - Additional Events: animation/animationevents.md
+    - Properties: animation/properties.md
+  - Vivify:
+    - Getting Started with Vivify: vivify/getting-started-with-vivify.md
+    - Events: vivify/events.md

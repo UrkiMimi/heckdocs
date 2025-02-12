@@ -71,7 +71,7 @@ Available components:
     },
     ```
 
-Additionally, components can be animated using the [`AnimateComponent`](Animation/#AnimateComponent) custom event.
+Additionally, components can be animated using the [`AnimateComponent`](animation/additional-events/#animatecomponent) custom event.
 
 ### TransformController
 Any GameObject assigned a track will automatically be assigned a `TransformController`. This is a standard Component which will follow `position`, `localPosition`, `rotation`, `localRotation`, and `scale` properties on a Track. These are the standard Unity properties on a Transform.
@@ -110,37 +110,36 @@ Example:
 *  `#!json "color": [r, g, b, a]` (floats)
 *  `#!json "shader": Standard, OpaqueLight, TransparentLight` What shader to use. OpaqueLight and TransparentLight will create a TubeBloomPrePassLightWithId and TubeBloomPrePassLight and can be controlled by standard lighting events. TransparentLight will be invisible when the light is turned off.
 *  `#!json "track": string` Assign the material to a track, allowing you to animate the `color`.
-*  `#!json "shaderKeywords": string[]` By default, each shader has its default keywords. This allows overwriting the keywords of the shader. 
+*  `#!json "shaderKeywords": string[]` By default, each shader has its default keywords. This allows overwriting the keywords of the shader.
 !!! danger
     The Standard shader has changed in BS v1.38, setting it to empty shaderKeywords no longer makes it appear full bright. Chroma will automatically add `["MULTIPLY_REFLECTIONS", "FOG", "DIFFUSE", "REFLECTION_PROBE_BOX_PROJECTION"]` when using an empty array to attempt to keep the Standard shader visible on old maps.
 ![keyworddiff](/assets/environment/shaderKeyword.png)
 
 !!! tip
     Every object needs a material, however creating materials can be laggy! The best way to assign materials is to create one initially, and then reuse it whenever you need one. It is recommended you reuse materials whenever possible as it is the most performant way of creating many geometry objects.
-    !!! example
-        ```json hl_lines="12 19"
-        "customData": {
-          "materials": {
-            "green standard": {
-              "color": [0, 1, 0, 0],
-              "shader": "Standard"
-            }
-          },
-          "environment": [
-            {
-              "geometry": {
-                "type": "Cylinder",
-                "material": "green standard"
-              },
-              "scale": [0.1, 0.1, 0.1],
+      ```json hl_lines="12 19"
+      "customData": {
+        "materials": {
+          "green standard": {
+            "color": [0, 1, 0, 0],
+            "shader": "Standard"
+          }
+        },
+        "environment": [
+          {
+            "geometry": {
+              "type": "Cylinder",
+              "material": "green standard"
             },
-            {
-              "geometry": {
-                "type": "Sphere",
-                "material": "green standard"
-              },
-              "position": [1, 1, 1]
-            }
-          ]
-        }
-        ```
+            "scale": [0.1, 0.1, 0.1],
+          },
+          {
+            "geometry": {
+              "type": "Sphere",
+              "material": "green standard"
+            },
+            "position": [1, 1, 1]
+          }
+        ]
+      }
+      ```

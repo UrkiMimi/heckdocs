@@ -69,7 +69,7 @@ Need to quickly prototype your map? Tired of having to exit the song and reload?
 
 ### Enabling
 
-In order to activate ReLoader, you must be in **Debug Mode**, which is activated with the launch parameter `-aerolunaisthebestmodder` (yes really). Afterwards, entering any song in practice mode will activate ReLoader. 
+In order to activate ReLoader, you must be in **Debug Mode**, which is activated with the launch parameter `-aerolunaisthebestmodder` (yes really). Afterwards, entering any song in practice mode will activate ReLoader.
 
 ### Keybinds
 
