@@ -3,13 +3,13 @@
 *Bring your map to life.*
 
 !!! note
-    As a reminder, you MUST add "Vivify" as a requirement to your map to activate Vivify. Additionally, Vivify will only load on v3 maps.
+    As a reminder, you **MUST** add "Vivify" as a requirement to your map to activate Vivify. Additionally, Vivify will only load on v3 maps.
 
 ## Setting up Unity
 
 First, you should download the [Unity Hub](https://unity3d.com/get-unity/download). Beat Saber 1.29.1 uses version
 *2019.4.28f* and Beat Saber 1.30.0+ uses *2021.3.16f1*. For maximum compatibility, you should use **2019.4.28f** found in
-the [archive](https://unity3d.com/get-unity/download/archive) and use Swifter's [VivifyTemplate](https://github.com/Swifter1243/VivifyTemplate) to setup your project and build your
+the [archive](https://unity3d.com/get-unity/download/archive) and use Swifter's **[VivifyTemplate](https://github.com/Swifter1243/VivifyTemplate)** to setup your project and build your
 bundles.
 
 !!! warning
@@ -19,7 +19,7 @@ Make sure you have `Virtual Reality Supported` enabled in your project and your 
 
 ## Writing VR shaders
 
-Beat Saber v1.29.1 uses Single Pass Stereo rendering (See [Single Pass Stereo rendering](https://docs.unity3d.com/2019.4/Documentation/Manual/SinglePassStereoRendering.html) for more info). Use the unity
+Beat Saber v1.29.1 uses **Single Pass Stereo** rendering (See [Single Pass Stereo rendering](https://docs.unity3d.com/2019.4/Documentation/Manual/SinglePassStereoRendering.html) for more info). Use the unity
 built-in function `UnityStereoTransformScreenSpaceTex` to fix your shaders in vr.
 
 ```hlsl
@@ -31,7 +31,7 @@ fixed4 frag (v2f i) : SV_Target
 }
 ```
 
-Beat Saber v1.30.0+ uses Single Pass Instanced rendering. Any incompatible shaders will only appear in the left eye. To
+Beat Saber v1.30.0+ uses **Single Pass Instanced** rendering. Any incompatible shaders will only appear in the left eye. To
 make your shader compatible with this vr rendering method, add instancing support to your shader.
 See [Single-pass instanced rendering and custom shaders](https://docs.unity3d.com/Manual/SinglePassInstancing.html) for how to add instancing support. Look under "
 Post-Processing shaders" to see how to sample a screen space texture.

@@ -43,10 +43,10 @@ nav:
     - Lighting Events: items/events.md
   - Modifying Environments:
     - Environment Enhancements: environment/environment.md
-    - User Shared Environments: environment/usershared.md
+    - User Shared Environments: environment/user-shared.md
   - Animation:
-    - Tracks and Points: animation/trackspoints.md
-    - Additional Events: animation/animationevents.md
+    - Tracks and Points: animation/tracks-and-points.md
+    - Additional Events: animation/additional-events.md
     - Properties: animation/properties.md
   - Vivify:
     - Getting Started with Vivify: vivify/getting-started-with-vivify.md
