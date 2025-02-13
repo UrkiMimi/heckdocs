@@ -1,6 +1,6 @@
 # Events
 
-Custom events added by vivify
+Custom events added by Vivify.
 
 ## Materials
 
