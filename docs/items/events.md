@@ -25,7 +25,7 @@ Not to be confused with custom events, these are *vanilla lighting events* that 
 * `#!json "lightID": int` Causes event to only affect specified [ID](https://streamable.com/dhs31). Can be an array.
 * `#!json "color": [r, g, b, a]` (floats) Array of RGB values (Alpha is optional and will default to 1 if not specified).
 * `#!json "easing": string` Any easing from [easings.net](https://easings.net) (with the addition of easeLinear and easeStep).
-* `#!json "lerpType": string` Lerp as `HSV` or `RGB`.![color lerp](/assets/items/ColorLerp.png) (Courtesy of [The Secrets of Colour Interpolation](https://www.alanzucconi.com/2016/01/06/colour-interpolation/)).
+* `#!json "lerpType": string` Lerp as `HSV` or `RGB`.![color lerp](../assets/items/ColorLerp.png) (Courtesy of [The Secrets of Colour Interpolation](https://www.alanzucconi.com/2016/01/06/colour-interpolation/)).
 
 ### Laser Speed
 

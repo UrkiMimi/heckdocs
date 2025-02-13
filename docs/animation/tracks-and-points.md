@@ -29,7 +29,7 @@ Tracks and point definitions are integral to Heck's animation systems and are us
 
 **Point definitions** are used to describe what happens over the course of an animation, they are used *slightly differently for different properties*. They consist of a collection of points over time.
 
-Here is an example of one being defined to animate [`offsetPosition`](AnimationProperties/#offsetPosition): (See: [AnimateTrack](#animatetrack))
+Here is an example of one being defined to animate [`offsetPosition`](properties.md#offsetposition): (See: [AnimateTrack](#animatetrack))
 
 ```json
 {
@@ -142,7 +142,7 @@ When a point definition is used, input time values outside of the defined points
 
 Meaning a point with time `0` would be right when the object finishes jumping in, a point with time `0.5` would be when the object reaches the player, at `0.75`, walls and notes will begin their despawn animation and start flying away very quickly, and `1` being right when the object despawns.
 
-![thanksbullet](/assets/animation/pathanimationpoints.png)
+![thanksbullet](../assets/animation/pathanimationpoints.png)
 
 !!! note
     Objects cannot be animated while they are in their jumping animation. During that time, they will instead strictly use the first point in the point definition.

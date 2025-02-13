@@ -25,7 +25,7 @@ Noodle Extensions and Chroma provide simple data you can add to any note or wall
 
 ### All Objects
 
-* `#!json "track": string/string[]` A single track or list of tracks that an object belongs to. Commonly used for animating groups of objects. Does nothing by itself. See [Tracks and Points](/animation/trackspoints).
+* `#!json "track": string/string[]` A single track or list of tracks that an object belongs to. Commonly used for animating groups of objects. Does nothing by itself. See [Tracks and Points](../animation/tracks-and-points.md).
 
 ## Noodle Extensions
 
@@ -50,11 +50,11 @@ If you wish to create **fake notes** (notes that do not show up in the note coun
 
 ### All Objects
 
-* `#!json "coordinates": [x, y]` (floats) Should be self explanatory. Will override `x` and `y` NOTE: All positions are based off the [Beatwalls system](/assets/items/beatwallsgrid.png).
+* `#!json "coordinates": [x, y]` (floats) Should be self explanatory. Will override `x` and `y` NOTE: All positions are based off the [Beatwalls system](../assets/items/beatwallsgrid.png).
 !!! note
     When sorting your notes, e.g. in a map parsing script, sort by `coordinates`, not `x` (line index) and `y` (line layer).
 * `#!json "worldRotation": [x, y, z]` (floats) Also known as "world rotation". Think the 360Degree Characteristic but way more options. This field can also be just a single float (`#!json "worldRotation": 90`) and it will be interpreted as [0, x, 0] (`#!json "worldRotation": [0, 90, 0]`). [0, 0, 0] will always be the initial position the player is facing at the beginning of the song.
-* `#!json "localRotation": [x, y, z]` (floats) Allows you to [rotate the object](/assets/items/rotatedwall.png). This won't affect the direction it spawns from or the path it takes. The origin for walls is the front bottom center, [as illustrated by spooky](/assets/items/frontcenter.png).
+* `#!json "localRotation": [x, y, z]` (floats) Allows you to [rotate the object](../assets/items/rotatedwall.png). This won't affect the direction it spawns from or the path it takes. The origin for walls is the front bottom center, [as illustrated by spooky](../assets/items/frontcenter.png).
 * `#!json "scale": [x, y, z]` (floats) Sets the scale of the object. This will affect the hitboxes. Because this directly sets the object's transform's scale, it will not correctly scale an obstacle's frame.
 * `#!json "noteJumpMovementSpeed": float` Set the NJS of an individual object.
 * `#!json "noteJumpStartBeatOffset": float` Set the spawn offset of an individual object.

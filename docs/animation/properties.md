@@ -37,7 +37,7 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
           }
         }
         ```
-        ![AnimateTrackPosition](/assets/animation/PositionAnimateTrack1.gif)
+        ![AnimateTrackPosition](../assets/animation/PositionAnimateTrack1.gif)
 
     === "AssignPathAnimation"
         ``` { .json .copy }
@@ -70,7 +70,7 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
           }
         }
         ```
-        ![AssignPathPosition](/assets/animation/PositionAssignPath.gif)
+        ![AssignPathPosition](../assets/animation/PositionAssignPath.gif)
 
 ### localRotation
 
@@ -82,7 +82,7 @@ This property describes the **local** rotation offset of an object. This means i
     Rotations are internally calculated **quaternions** to prevent gimbal lock. Rather than representing a set of rotations like euler, quaternions represent an orientation. In other words, `#!json [[0, 0, 0, 0], [360, 360, 360, 1]]` will have no movement at all, as both points are identical internally.
 
 !!! tip
-    Notes attempting to look towards the player may look strange, you can disable their look with [`disableNoteLook`](/items/objects/#notes).
+    Notes attempting to look towards the player may look strange, you can disable their look with [`disableNoteLook`](../items/objects.md#notes).
 
 Multiple of this property will be added together.
 
@@ -127,7 +127,7 @@ Point definition: `[pitch, yaw, roll, time, (optional) easing, (optional) spline
           }
         }
         ```
-        ![AnimateTrackLocalRotation](/assets/animation/LocalRotationAnimateTrack.gif)
+        ![AnimateTrackLocalRotation](../assets/animation/LocalRotationAnimateTrack.gif)
 
     === "AssignPathAnimation"
         ``` { .json .copy }
@@ -149,7 +149,7 @@ Point definition: `[pitch, yaw, roll, time, (optional) easing, (optional) spline
           }
         }
         ```
-        ![AssignPathLocalRotation](/assets/animation/LocalRotationAssignPath.gif)
+        ![AssignPathLocalRotation](../assets/animation/LocalRotationAssignPath.gif)
 
 ### offsetWorldRotation
 
@@ -187,7 +187,7 @@ Point definition: `[pitch, yaw, roll, time, (optional) easing]`
           }
         }
         ```
-        ![AnimateTrackRotation](/assets/animation/RotationAnimateTrack.gif)
+        ![AnimateTrackRotation](../assets/animation/RotationAnimateTrack.gif)
 
     === "AssignPathAnimation"
         ``` { .json .copy }
@@ -221,7 +221,7 @@ Point definition: `[pitch, yaw, roll, time, (optional) easing]`
           }
         }
         ```
-        ![AssignPathRotation](/assets/animation/RotationAssignPath.gif)
+        ![AssignPathRotation](../assets/animation/RotationAssignPath.gif)
 
 ### scale
 
@@ -255,7 +255,7 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
           }
         }
         ```
-        ![AnimateTrackScale](/assets/animation/ScaleAnimateTrack.gif)
+        ![AnimateTrackScale](../assets/animation/ScaleAnimateTrack.gif)
 
     === "AssignPathAnimation"
         ``` { .json .copy }
@@ -275,7 +275,7 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
           }
         }
         ```
-        ![AssignPathScale](/assets/animation/ScaleAssignPath.gif)
+        ![AssignPathScale](../assets/animation/ScaleAssignPath.gif)
 
 ### dissolve
 
@@ -341,7 +341,7 @@ Point definition: `[transparency, time, (optional) easing]`
           }
         }
         ```
-        ![AnimateTrackDissolve](/assets/animation/DissolveAnimateTrack.gif)
+        ![AnimateTrackDissolve](../assets/animation/DissolveAnimateTrack.gif)
 
     === "AssignPathAnimation"
         ``` { .json .copy }
@@ -363,7 +363,7 @@ Point definition: `[transparency, time, (optional) easing]`
           }
         }
         ```
-        ![AssignPathDissolve](/assets/animation/DissolveAssignPath.gif)
+        ![AssignPathDissolve](../assets/animation/DissolveAssignPath.gif)
 
 ### dissolveArrow
 
@@ -405,7 +405,7 @@ Point definition: `[transparency, time, (optional) easing]`
           }
         }
         ```
-        ![AnimateTrackDissolveArrow](/assets/animation/DissolveArrowAnimateTrack.gif)
+        ![AnimateTrackDissolveArrow](../assets/animation/DissolveArrowAnimateTrack.gif)
 
     === "AssignPathAnimation"
         ``` { .json .copy }
@@ -426,7 +426,7 @@ Point definition: `[transparency, time, (optional) easing]`
           }
         }
         ```
-        ![AssignPathDissolveArrow](/assets/animation/DissolveArrowAssignPath.gif)
+        ![AssignPathDissolveArrow](../assets/animation/DissolveArrowAssignPath.gif)
 
 ### interactable
 
@@ -492,7 +492,7 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
       }
     }
     ```
-    ![AssignPathDefinitePosition](/assets/animation/DefinitePositionAnimateTrack.gif)
+    ![AssignPathDefinitePosition](../assets/animation/DefinitePositionAnimateTrack.gif)
 
 ### time
 
@@ -566,7 +566,7 @@ Point definition: `[time, time, (optional) easing]`
       }
     }
     ```
-    ![AnimateTrackTime](/assets/animation/TimeIsDumb.gif)
+    ![AnimateTrackTime](../assets/animation/TimeIsDumb.gif)
 
 ## Chroma
 
@@ -619,7 +619,7 @@ Point definition: `[red, green, blue, alpha, time, (optional) easing]`
           }
         }
         ```
-        ![AnimateTrackColor](/assets/animation/ColorAnimateTrack.gif)
+        ![AnimateTrackColor](../assets/animation/ColorAnimateTrack.gif)
 
     === "AssignPathAnimation"
         ``` { .json .copy }
@@ -689,4 +689,4 @@ Point definition: `[red, green, blue, alpha, time, (optional) easing]`
           }
         }
         ```
-        ![AssignPathColor](/assets/animation/ColorAssignPath.gif)
+        ![AssignPathColor](../assets/animation/ColorAssignPath.gif)

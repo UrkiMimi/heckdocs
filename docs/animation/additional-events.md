@@ -18,7 +18,7 @@ These are additional custom events that use tracks and point definitions.
 }
 ```
 
-**`AssignTrackParent`** will create an new GameObject with a [TransformController](/environment/environment/#transformcontroller) and parent any number of children tracks to it.
+**`AssignTrackParent`** will create an new GameObject with a [TransformController](../environment/environment.md#transformcontroller) and parent any number of children tracks to it.
 
 ### AssignPlayerToTrack
 
@@ -33,7 +33,7 @@ These are additional custom events that use tracks and point definitions.
 }
 ```
 
-**`AssignPlayerToTrack`** will assign the player a [TransformController](/environment/environment/#transformcontroller).
+**`AssignPlayerToTrack`** will assign the player a [TransformController](../environment/environment.md#transformcontroller).
 Available targets are `Root`, `Head`, `LeftHand`, and `RightHand`.
 
 !!! warning
@@ -60,7 +60,7 @@ Available targets are `Root`, `Head`, `LeftHand`, and `RightHand`.
 }
 ```
 
-**`AnimateComponent`** allows for animating [components](/environment/environment/#components). Animating fog [demo](https://streamable.com/d1ztwq).
+**`AnimateComponent`** allows for animating [components](../environment/environment.md#components). Animating fog [demo](https://streamable.com/d1ztwq).
 
 !!! example
     Lights start off extremely bright and then quickly dim.

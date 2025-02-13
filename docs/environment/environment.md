@@ -72,7 +72,7 @@ Available components:
     },
     ```
 
-Additionally, components can be animated using the [`AnimateComponent`](animation/additional-events/#animatecomponent) custom event.
+Additionally, components can be animated using the [`AnimateComponent`](../animation/additional-events.md#animatecomponent) custom event.
 
 ### TransformController
 
@@ -117,7 +117,7 @@ Any GameObject assigned a track will automatically be assigned a `TransformContr
 * `#!json "shaderKeywords": string[]` By default, each shader has its default keywords. This allows overwriting the keywords of the shader.
 !!! danger
     The Standard shader has changed in BS v1.38, setting it to empty shaderKeywords no longer makes it appear full bright. Chroma will automatically add `["MULTIPLY_REFLECTIONS", "FOG", "DIFFUSE", "REFLECTION_PROBE_BOX_PROJECTION"]` when using an empty array to attempt to keep the Standard shader visible on old maps.
-![Keyword difference](/assets/environment/shaderKeyword.png)
+![Keyword difference](../assets/environment/shaderKeyword.png)
 
 !!! tip
     Every object needs a material, however creating materials can be laggy! The best way to assign materials is to create one initially, and then reuse it whenever you need one. It is recommended you reuse materials whenever possible as it is the most performant way of creating many geometry objects.

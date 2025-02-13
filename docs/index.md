@@ -1,6 +1,6 @@
 # Heck
 
-![heck logo](/assets/firebunni.png)
+![heck logo](assets/firebunni.png)
 
 *what the heck!?*
 

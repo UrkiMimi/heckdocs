@@ -1,6 +1,6 @@
 # User Shared Environments
 
-After creating a custom environment, they can be turned into a shareable standalone JSON that can be used on any map like the override environment option. These JSONs must be placed in `UserData/Chroma/Environments/` and must have the file extension `.dat`. These files will be loaded when you launch Beat Saber and will produce errors in your log when any fail to load.
+After creating a custom environment, they can be turned into a shareable standalone JSON that can be used on any map like the override environment option. These JSONs must be placed in `UserData/Chroma../environments/` and must have the file extension `.dat`. These files will be loaded when you launch Beat Saber and will produce errors in your log when any fail to load.
 
 !!! tip
     You can also manually reload the files without restarting Beat Saber if you are in Debug Mode (launch parameter `-aerolunaisthebestmodder`) by pressing `Ctrl+E`.
