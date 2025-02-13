@@ -6,11 +6,11 @@ Custom events added by Vivify.
 
 ### Property Types
 
-- Texture: Must be a string that is a direct path file to a texture.
-- Float: May either be a direct value (`#!json "value": 10.4`) or a point definition (`#!json "value": [[0,0], [10, 1]]`).
-- Color: May either be an RGBA array (`#!json "value": [0, 1, 0]`) or a point definition (`#!json "value": [1, 0, 0, 0, 0.2], [0, 0, 1, 0, 0.6]`).
-- Vector: May either be an array (`#!json "value": [0, 1, 0]`) or a point definition (`#!json "value": [1, 0, 0, 0, 0.2], [0, 0, 1, 0, 0.6]`).
-- Keyword: May either be a direct value (`#!json "value": true`) or a point definition (`#!json "value": [[0,0], [1, 1]]`) where values equal to or greater than 1 will enable the keyword.
+- **Texture**: Must be a string that is a direct path file to a texture.
+- **Float**: May either be a direct value (`#!json "value": 10.4`) or a point definition (`#!json "value": [[0,0], [10, 1]]`).
+- **Color**: May either be an RGBA array (`#!json "value": [0, 1, 0]`) or a point definition (`#!json "value": [1, 0, 0, 0, 0.2], [0, 0, 1, 0, 0.6]`).
+- **Vector**: May either be an array (`#!json "value": [0, 1, 0]`) or a point definition (`#!json "value": [1, 0, 0, 0, 0.2], [0, 0, 1, 0, 0.6]`).
+- **Keyword**: May either be a direct value (`#!json "value": true`) or a point definition (`#!json "value": [[0,0], [1, 1]]`) where values equal to or greater than 1 will enable the keyword.
 
 !!! example
     ```json
@@ -319,12 +319,10 @@ Allows setting animator properties. This will search the prefab for all Animator
 
 Property types:
 
-- Bool: May either be a direct value (`#!json "value": true`) or a point definition (`#!json "value": [[0,0], [1, 1]]`). Any value
-  greater than or equal to 1 is true.
-- Float: May either be a direct value (`#!json "value": 10.4`) or a point definition (`#!json "value": [[0,0], [10, 1]]`).
-- Integer: May either be a direct value (`#!json "value": 10`) or a point definition (`#!json "value": [[0,0], [10, 1]]`). Value will
-  be rounded.
-- Trigger: Must be `true` to set trigger or `false` to reset trigger. Can not be a point definition.
+- **Bool**: May either be a direct value (`#!json "value": true`) or a point definition (`#!json "value": [[0,0], [1, 1]]`). Any value greater than or equal to 1 is true.
+- **Float**: May either be a direct value (`#!json "value": 10.4`) or a point definition (`#!json "value": [[0,0], [10, 1]]`).
+- **Integer**: May either be a direct value (`#!json "value": 10`) or a point definition (`#!json "value": [[0,0], [10, 1]]`). Value will be rounded.
+- **Trigger**: Must be `true` to set trigger or `false` to reset trigger. Can not be a point definition.
 
 ## AssignObjectPrefab
 

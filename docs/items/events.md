@@ -21,7 +21,6 @@ Not to be confused with custom events, these are *vanilla lighting events* that 
 
 ### Standard Lights
 
-* Will only apply to the single light it's attached to.
 * `#!json "lightID": int` Causes event to only affect specified [ID](https://streamable.com/dhs31). Can be an array.
 * `#!json "color": [r, g, b, a]` (floats) Array of RGB values (Alpha is optional and will default to 1 if not specified).
 * `#!json "easing": string` Any easing from [easings.net](https://easings.net) (with the addition of easeLinear and easeStep).

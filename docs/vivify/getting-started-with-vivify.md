@@ -96,6 +96,11 @@ Post-Processing shaders" to see how to sample a screen space texture.
             }
             ```
 
+!!! warning
+    Beat Saber applies a constant post-processing effect that **converts alpha to bloom**. If your model appears normal in the editor, but pure glowing white in-game, your shader is likely outputting an alpha of 1. Make sure to use a Beat Saber compatible shader or that your own shader is not outputting an alpha if you do not want it to glow.
+
+    If necesssary, the bloom effect can be disabled using [SetCameraProperty](events.md#setcameraproperty), though this is not recommended because the will break other shaders that may rely on this effect, such as notes, walls, sabers, lighting, and ui.
+
 ## Creating an asset bundle
 
 (Optional) See [Unity Asset Bundle Browser tool](https://docs.unity3d.com/2019.4/Documentation/Manual/AssetBundles-Browser.html). This tool allows you to browse the contents of
@@ -115,7 +120,7 @@ Map Folder
 └── info.dat
 ```
 
-When referencing an asset's file path in an event, remember to write in all lower case. You can use the above Asset
+When referencing an asset's file path in an event, remember to write in all *lower case*. You can use the above Asset
 Bundle Browser tool to see the path of specific assets.
 
 By default, when Vivify will check against a checksum when loading an asset bundle. This checksum can be found in the file next to wherever you build your bundle in the form of `*.manifest` (VivifyTemplate will instead write a `bundleinfo.json`). You can add the checksum to the map by using the `"_assetBundle"` field in the info.dat.
