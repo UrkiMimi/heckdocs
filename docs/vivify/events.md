@@ -2,7 +2,7 @@
 
 Custom events added by vivify
 
-## Shader Properties
+## Materials
 
 ### Property Types
 
@@ -49,7 +49,7 @@ Custom events added by vivify
     "properties": [{
       "id": string, // Name of the property on the material.
       "type": string, // Type of the property (Texture, Float, Color, Vector, Keyword).
-      "value": ? // What to set the property to, type varies depending on property type.
+      "value": value/point definition // What to set the property to, type varies depending on property type.
     }]
   }
 }
@@ -69,16 +69,15 @@ Allows setting material properties, e.g. Texture, Float, Color, Vector, Keyword.
     "properties": [{
       "id": string, // Name of the property.
       "type": string, // Type of the property (Texture, Float, Color, Vector, Keyword).
-      "value": ? // What to set the property to, type varies depending on property type.
+      "value": value/point definition // What to set the property to, type varies depending on property type.
     }]
   }
 }
 ```
 
-Allows setting global properties, e.g. Texture, Float, Color, Vector, Keyword. These will persist even after the map ends, do not rely on
-their default value.
+Allows setting global shader properties, e.g. Texture, Float, Color, Vector, Keyword.
 
-## Blit
+### Blit
 
 ```json
 {
@@ -121,9 +120,9 @@ This event allows you to call a [SetMaterialProperty](#setmaterialproperty) from
     }
     ```
 
-# TODO: FINISH THIS
+## Camera
 
-## CreateCamera
+### CreateCamera
 
 ```json
 {
@@ -132,7 +131,7 @@ This event allows you to call a [SetMaterialProperty](#setmaterialproperty) from
   "d": {
     "id": string, // Id of the camera.
     "texture": string, // (Optional) Will render to a new texture set to this key.
-    "depthTexture": string // (Optional) Renders just the depth to this texture.
+    "depthTexture": string, // (Optional) Renders just the depth to this texture.
     "properties": ? // (Optional) See SetCameraProperty
   }
 }
@@ -140,163 +139,48 @@ This event allows you to call a [SetMaterialProperty](#setmaterialproperty) from
 
 Creates an additional camera that will render to the desired texture. Useful for creating a secondary texture where a certain track is culled.
 
-```json
-// Example
-{
-  "b": 0.0,
-  "t": "CreateCamera",
-  "d": {
-    "id": "NotesCam",
-    "texture": "_Notes",
-    "depthTexture": "_Notes_Depth",
-    "properties": {
-      "culling": {
-        "track": "allnotes",
-        "whitelist": true,
-      },
-      "depthTextureMode": ["Depth"]
-    }
-  }
-}
-```
+!!! danger
+    `CreateCamera` has a significant performance increase as each camera must render your scene again. Be careful about using this event and use `DestroyObject` to destroy the cameras after using them.
 
-```csharp
-//Example where notes are not rendered on the right side of the screen
-UNITY_DECLARE_SCREENSPACE_TEXTURE(_Notes);
+??? example
+    Example where notes are not rendered on the right side of the screen.
+    === "JSON"
+        ```json
+        {
+          "b": 0.0,
+          "t": "CreateCamera",
+          "d": {
+            "id": "NotesCam",
+            "texture": "_Notes",
+            "depthTexture": "_Notes_Depth",
+            "properties": {
+              "culling": {
+                "track": "allnotes",
+                "whitelist": true,
+              },
+              "depthTextureMode": ["Depth"]
+            }
+          }
+        }
+        ```
+    === "Shader"
+        ```csharp
+        UNITY_DECLARE_SCREENSPACE_TEXTURE(_Notes);
 
-fixed4 frag(v2f i) : SV_Target
-{
-  UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
-  if (i.uv.x > 0.5)
-  {
-    return UNITY_SAMPLE_SCREENSPACE_TEXTURE(_Notes, UnityStereoTransformScreenSpaceTex(i.uv));
-  }
-  else {
-    return UNITY_SAMPLE_SCREENSPACE_TEXTURE(_MainTex, UnityStereoTransformScreenSpaceTex(i.uv));
-  }
-}
-```
+        fixed4 frag(v2f i) : SV_Target
+        {
+          UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
+          if (i.uv.x > 0.5)
+          {
+            return UNITY_SAMPLE_SCREENSPACE_TEXTURE(_Notes, UnityStereoTransformScreenSpaceTex(i.uv));
+          }
+          else {
+            return UNITY_SAMPLE_SCREENSPACE_TEXTURE(_MainTex, UnityStereoTransformScreenSpaceTex(i.uv));
+          }
+        }
+        ```
 
-## CreateScreenTexture
-
-```json
-{
-  "b": float, // Time in beats.
-  "t": "CreateScreenTexture",
-  "d": {
-    "id": string, // Name of the texture
-    "xRatio": float, // (Optional) Number to divide width by, i.e. on a 1920x1080 screen, an xRatio of 2 will give you a 960x1080 texture.
-    "yRatio": float, // (Optional) Number to divide height by.
-    "width": int, // (Optional) Exact width for the texture.
-    "height": int, // (Optional) Exact height for the texture.
-    "colorFormat": string, // (Optional) https://docs.unity3d.com/ScriptReference/RenderTextureFormat.html
-    "filterMode": string // (Optional) https://docs.unity3d.com/ScriptReference/FilterMode.html
-  }
-}
-```
-
-Declares a RenderTexture to be used anywhere. They are set as a global variable and can be accessed by declaring a
-sampler named what you put in "id".
-
-```json
-// Example
-// Here we declare a texture called "snapshot", capture a single frame at 78.0, then store it in our new render texture.
-// Lastly we destroy the texture (See below) after we are done with it to free up any memory it was taking.
-// (Realistically, won't provide noticable boost to performance, but it can't hurt.)
-{
-  "b": 70.0,
-  "t": "DeclareRenderTexture",
-  "d": {
-    "id": "snapshot"
-  }
-},
-{
-  "b": 78.0,
-  "t": "Blit",
-  "d": {
-    "destination": "snapshot"
-  }
-},
-{
-  "b": 120.0,
-  "t": "DestroyTexture",
-  "d": {
-    "id": "snapshot"
-  }
-}
-```
-
-## InstantiatePrefab
-
-```json
-{
-  "b": float, // Time in beats.
-  "t": "InstantiatePrefab",
-  "d": {
-    "asset": string, // File path to the desired prefab.
-    "id": string, // (Optional) Unique id for referencing prefab later. Random id will be given by default.
-    "track": string, // (Optional) Track to animate prefab transform.
-    "position": vector3, // (Optional) Set position.
-    "localPosition": vector3, // (Optional) Set localPosition.
-    "rotation": vector3, // (Optional) Set rotation (in euler angles).
-    "localRotation": vector3. // (Optional) Set localRotation (in euler angles).
-    "scale": vector3 //(Optional) Set scale.
-  }
-}
-```
-
-Instantiates a prefab in the scene. If left-handed option is enabled, then the position, rotation, and scale will be
-mirrored.
-
-## DestroyObject
-
-```json
-{
-  "b": float, // Time in beats.
-  "t": "DestroyObject",
-  "d": {
-    "id": string or string[], // Id(s) of object to destroy.
-  }
-}
-```
-
-Destroys an object in the scene. Can be a prefab, camera, or texture id.
-
-It is important to destroy any cameras created through `CreateCamera` because the scene
-will have to be rendered again for each active camera. This can also be used for textures created
-through `DeclareRenderTexture` to free up memory.
-
-## SetAnimatorProperty
-
-```json
-{
-  "b": float, // Time in beats.
-  "t": "SetAnimatorProperty",
-  "d": {
-    "id": string, // Id assigned to prefab.
-    "duration": float, // (Optional) The length of the event in beats. Defaults to 0.
-    "easing": string, // (Optional) An easing for the animation to follow. Defaults to "easeLinear".
-    "properties": [{
-      "id": string, // Name of the property.
-      "type": string, // Type of the property (Bool, Float, Trigger).
-      "value": ? // What to set the property to, type varies depending on property type.
-    }]
-  }
-}
-```
-
-Allows setting animator properties. This will search the prefab for all Animator components.
-
-### Property types
-
-- Bool: May either be a direct value (`"value": true`) or a point definition (`"value": [[0,0], [1, 1]]`). Any value
-  greater than or equal to 1 is true.
-- Float: May either be a direct value (`"value": 10.4`) or a point definition (`"value": [[0,0], [10, 1]]`).
-- Integer: May either be a direct value (`"value": 10`) or a point definition (`"value": [[0,0], [10, 1]]`). Value will
-  be rounded.
-- Trigger: Must be `true` to set trigger or `false` to reset trigger.
-
-## SetCameraProperty
+### SetCameraProperty
 
 ```json
 {
@@ -319,9 +203,128 @@ Allows setting animator properties. This will search the prefab for all Animator
 }
 ```
 
-Setting any field to `null` will return it to its default. Remember to clear the `depthTextureMode` to `null` after you are done using it as rendering a depth texture can impact
-performance. See https://docs.unity3d.com/Manual/SL-CameraDepthTexture.html for more info. Note: if the player has the
-Smoke option enabled, the `depthTextureMode` will always have `Depth`.
+Used to set properties on the main camera or cameras created through `CreateCamera`
+Setting any field to `null` will return it to its default. Remember to clear the `depthTextureMode` to `null` after you are done using it as rendering a depth texture can impact performance. See [Output a depth texture from a camera](https://docs.unity3d.com/Manual/SL-CameraDepthTexture.html) for more info.
+!!! note
+    If the player has the Smoke option enabled, the `depthTextureMode` will always have `Depth`.
+
+## CreateScreenTexture
+
+```json
+{
+  "b": float, // Time in beats.
+  "t": "CreateScreenTexture",
+  "d": {
+    "id": string, // Name of the texture
+    "xRatio": float, // (Optional) Number to divide width by, i.e. on a 1920x1080 screen, an xRatio of 2 will give you a 960x1080 texture.
+    "yRatio": float, // (Optional) Number to divide height by.
+    "width": int, // (Optional) Exact width for the texture.
+    "height": int, // (Optional) Exact height for the texture.
+    "colorFormat": string, // (Optional) https://docs.unity3d.com/ScriptReference/RenderTextureFormat.html
+    "filterMode": string // (Optional) https://docs.unity3d.com/ScriptReference/FilterMode.html
+  }
+}
+```
+
+Declares a RenderTexture to be used anywhere. They are set as a global variable and can be accessed by declaring a
+sampler named what you put in "id".
+
+!!! example
+    Here we declare a texture called "snapshot", capture a single frame at 78.0, then store it in our new render texture.
+    Lastly we destroy the texture (See DestroyObject) after we are done with it to free up any memory it was taking.
+    (Realistically, won't provide noticeable boost to performance, but it can't hurt.)
+    ```json
+    {
+      "b": 70.0,
+      "t": "CreateScreenTexture",
+      "d": {
+        "id": "snapshot"
+      }
+    },
+    {
+      "b": 78.0,
+      "t": "Blit",
+      "d": {
+        "destination": "snapshot"
+      }
+    },
+    {
+      "b": 120.0,
+      "t": "DestroyObject",
+      "d": {
+        "id": "snapshot"
+      }
+    }
+    ```
+
+## InstantiatePrefab
+
+```json
+{
+  "b": float, // Time in beats.
+  "t": "InstantiatePrefab",
+  "d": {
+    "asset": string, // File path to the desired prefab.
+    "id": string, // (Optional) Unique id for referencing prefab later. Random id will be given by default.
+    "track": string, // (Optional) Track to animate prefab transform.
+    "position": vector3, // (Optional) Set position.
+    "localPosition": vector3, // (Optional) Set localPosition.
+    "rotation": vector3, // (Optional) Set rotation (in euler angles).
+    "localRotation": vector3, // (Optional) Set localRotation (in euler angles).
+    "scale": vector3 //(Optional) Set scale.
+  }
+}
+```
+
+Instantiates a prefab in the scene. If left-handed option is enabled, then the position, rotation, and scale will be
+mirrored.
+
+## DestroyObject
+
+```json
+{
+  "b": float, // Time in beats.
+  "t": "DestroyObject",
+  "d": {
+    "id": string/string[], // Id(s) of object to destroy.
+  }
+}
+```
+
+Destroys an object in the scene. Can be a prefab, camera, or texture id.
+
+It is important to destroy any cameras created through `CreateCamera` because the scene
+will have to be rendered again for each active camera.
+
+## SetAnimatorProperty
+
+```json
+{
+  "b": float, // Time in beats.
+  "t": "SetAnimatorProperty",
+  "d": {
+    "id": string, // Id assigned to prefab.
+    "duration": float, // (Optional) The length of the event in beats. Defaults to 0.
+    "easing": string, // (Optional) An easing for the animation to follow. Defaults to "easeLinear".
+    "properties": [{
+      "id": string, // Name of the property.
+      "type": string, // Type of the property (Bool, Float, Trigger).
+      "value": value/point definition // What to set the property to, type varies depending on property type.
+    }]
+  }
+}
+```
+
+Allows setting animator properties. This will search the prefab for all Animator components.
+
+Property types:
+
+- Bool: May either be a direct value (`#!json "value": true`) or a point definition (`#!json "value": [[0,0], [1, 1]]`). Any value
+  greater than or equal to 1 is true.
+- Float: May either be a direct value (`#!json "value": 10.4`) or a point definition (`#!json "value": [[0,0], [10, 1]]`).
+- Integer: May either be a direct value (`#!json "value": 10`) or a point definition (`#!json "value": [[0,0], [10, 1]]`). Value will
+  be rounded.
+- Trigger: Must be `true` to set trigger or `false` to reset trigger. Can not be a point definition.
 
 ## AssignObjectPrefab
 
@@ -337,53 +340,53 @@ Smoke option enabled, the `depthTextureMode` will always have `Depth`.
 ```
 
 Assigns prefabs to a specific object. Setting any asset to `null` is equivalent to resetting to the default model. Most
-objects will have their per-instance properties set automatically. (See section "Adding per-instance properties to GPU
-instancing shaders" at https://docs.unity3d.com/Manual/gpu-instancing-shader.html)
+objects will have their per-instance properties set automatically (See section "Adding per-instance properties to GPU
+instancing shaders" at [Creating shaders that support GPU instancing](https://docs.unity3d.com/2021.3/Documentation/Manual/gpu-instancing-shader.html)).
 
-- `loadMode`: `Single, Additive`
+- `#!json "loadMode": Single/Additive`
     - `Single`: Clears all loaded prefabs on the object and adds a prefab
     - `Additive`: Adds a prefab to the currently loaded prefabs.
-- `colorNotes`:
-    - `track`: `string` Only notes on this track(s) will be affected.
-    - `asset`: `string` (Optional) File path to the desired prefab. Only applies to directional notes. Sets
-      properties `_Color`, `_Cutout`, and `_CutoutTexOffset`.
-    - `anyDirectionAsset`: `string` (Optional) Only applies to dot notes. Sets same properties as directional notes.
-    - `debrisAsset`: `string` (Optional) Applies to cut debris. Sets properties `_Color`, `_Cutout`, `_CutPlane`,
-      and `_CutoutTexOffset`.
-- `burstSliders`:
-    - `track`: `string` See above.
-    - `asset`: `string` (Optional) See above.
-    - `debrisAsset`: `string` (Optional) See above.
-- `burstSliderElemeents`:
-    - `track`: `string` See above.
-    - `asset`: `string` (Optional) See above.
-    - `debrisAsset`: `string` (Optional) See above.
-- `saber`:
-    - `type`: `string` Which saber to affect. `Left`, `Right` or `Both`.
-    - `asset`: `string` (Optional) File path to the desired prefab. Sets property `_Color`.
-    - `trailAsset`: `string` (Optional) File path to the material to replace the trail. Sets property `_Color` and sets
-      vertex colors for a gradient.
-    - `trailTopPos`: `vector3` (Optional) Vector3 position of the top of the trail. Defaults to [0, 0, 1]
-    - `trailBottomPos`: `vector3` (Optional) Vector3 position of the top of the trail. Defaults to [0, 0, 0]
-    - `trailDuration`: `float` (Optional) Age of most distant segment of trail. Defaults to 0.4
-    - `trailSamplingFrequency`: `int` (Optional) Saber position snapshots taken per second. Defaults to 50
-    - `trailGranularity`: `int` (Optional) Segments count in final trail mesh. Defaults to 60
+- `#!json "colorNotes"`:
+    - `#!json "track": string` Only notes on this track(s) will be affected.
+    - `#!json "asset": string` (Optional) File path to the desired prefab. Only applies to directional notes. Sets properties `_Color`, `_Cutout`, and `_CutoutTexOffset`.
+    - `#!json "anyDirectionAsset": string` (Optional) Only applies to dot notes. Sets same properties as directional notes.
+    - `#!json "debrisAsset": string` (Optional) Applies to cut debris. Sets properties `_Color`, `_Cutout`, `_CutPlane`, and `_CutoutTexOffset`.
+- `#!json "burstSliders"`:
+    - `#!json "track": string` See above.
+    - `#!json "asset": string` (Optional) See above.
+    - `#!json "debrisAsset": string` (Optional) See above.
+- `#!json "burstSliderElements"`:
+    - `#!json "track": string` See above.
+    - `#!json "asset": string` (Optional) See above.
+    - `#!json "debrisAsset": string` (Optional) See above.
+- `#!json "bombNotes"`:
+    - `#!json "track": string` See above.
+    - `#!json "asset": string` (Optional) See above.
+- `#!json "saber"`:
+    - `#!json "type": string` Which saber to affect. `Left`, `Right` or `Both`.
+    - `#!json "asset": string` (Optional) File path to the desired prefab. Sets property `_Color`.
+    - `#!json "trailAsset": string` (Optional) File path to the material to replace the trail. Sets property `_Color` and sets vertex colors for a gradient.
+    - `#!json "trailTopPos": vector3` (Optional) Vector3 position of the top of the trail. Defaults to [0, 0, 1]
+    - `#!json "trailBottomPos": vector3` (Optional) Vector3 position of the bottom of the trail. Defaults to [0, 0, 0]
+    - `#!json "trailDuration": float` (Optional) Age of most distant segment of trail. Defaults to 0.4
+    - `#!json "trailSamplingFrequency": int` (Optional) Saber position snapshots taken per second. Defaults to 50
+    - `#!json "trailGranularity": int` (Optional) Segments count in final trail mesh. Defaults to 60
 
-```json
-// Example
-// Adds a cool particle system to your sabers!
-{
-  "b": 70.0,
-  "t": "AssignObjectPrefab",
-  "d": {
-    "loadMode": "Additive",
-    "saber": {
-      "type": "Both",
-      "asset": "assets/path/to/cool/particlesystem.prefab"
+!!! example
+    Adds a cool particle system to your sabers!
+    ```json
+    {
+      "b": 70.0,
+      "t": "AssignObjectPrefab",
+      "d": {
+        "loadMode": "Additive",
+        "saber": {
+          "type": "Both",
+          "asset": "assets/path/to/cool/particlesystem.prefab"
+        }
+      }
     }
-  }
-}
-```
+    ```
 
 ## SetRenderingSettings
 
@@ -395,69 +398,68 @@ instancing shaders" at https://docs.unity3d.com/Manual/gpu-instancing-shader.htm
     "duration": float, // (Optional) The length of the event in beats. Defaults to 0.
     "easing": string, // (Optional) An easing for the animation to follow. Defaults to "easeLinear".
     "category": {
-        "property": value or point definition // The setting to set
+        "property": value/point definition // The setting to set
     }
   }
 }
 ```
+
+Allows changing most Unity rendering or quality settings.
 
 Property does not have to be a point definition. When enabling a render setting with a performance cost, remember to disable it after you no longer need it to gain performance back.
 
 Current provided settings:
 
-`"renderSettings"`: https://docs.unity3d.com/ScriptReference/RenderSettings.html
+- `#!json "renderSettings"` [RenderSettings](https://docs.unity3d.com/ScriptReference/RenderSettings.html)
+    - `#!json "ambientEquatorColor": color`
+    - `#!json "ambientGroundColor": color`
+    - `#!json "ambientIntensity": float`
+    - `#!json "ambientLight": color`
+    - `#!json "ambientMode": 0/1/3/4` Skybox, Trilight, Flat, Custom
+    - `#!json "ambientSkyColor": color`
+    - `#!json "defaultReflectionMode": 0/1` Skybox, Custom
+    - `#!json "defaultReflectionResolution": int`
+    - `#!json "flareFadeSpeed": float`
+    - `#!json "flareStrength": float`
+    - `#!json "fog": 0/1` Bool
+    - `#!json "fogColor": color`
+    - `#!json "fogDensity": float`
+    - `#!json "fogEndDistance": float`
+    - `#!json "fogMode": 1/2/3` Linear, Exponential, ExponentialSquared
+    - `#!json "fogEndDistance": float`
+    - `#!json "haloStrength": float`
+    - `#!json "reflectionBounces": int`
+    - `#!json "reflectionIntensity": float`
+    - `#!json "skybox": string` File path to a material
+    - `#!json "subtractiveShadowColor": color`
+    - `#!json "sun": string` Id from InstantiatePrefab event, will find the first directional light on the top level GameObject
 
-- `"ambientEquatorColor"`: (color)
-- `"ambientGroundColor"`: (color)
-- `"ambientIntensity"`: (float)
-- `"ambientLight"`: (color)
-- `"ambientMode"`: (0, 1, 3, 4) Skybox, Trilight, Flat, Custom
-- `"ambientSkyColor"`: (color)
-- `"defaultReflectionMode"`: (0, 1) Skybox, Custom
-- `"defaultReflectionResolution"`: (int)
-- `"flareFadeSpeed"`: (float)
-- `"flareStrength"`: (float)
-- `"fog"`: (0, 1) Bool
-- `"fogColor"`: (color)
-- `"fogDensity"`: (float)
-- `"fogEndDistance"`: (float)
-- `"fogMode"`: (1, 2, 3) Linear, Exponential, ExponentialSquared
-- `"fogEndDistance"`: (float)
-- `"haloStrength"`: (float)
-- `"reflectionBounces"`: (int)
-- `"reflectionIntensity"`: (float)
-- `"skybox"`: (string) File path to a material
-- `"subtractiveShadowColor"`: (color)
-- `"sun"`: (string) Id from InstantiatePrefab event, will find the first directional light on the top level GameObject
+- `#!json "qualitySettings"`: [QualitySettings](https://docs.unity3d.com/ScriptReference/QualitySettings.html)
+    - `#!json "anisotropicFiltering": 0/1/2` Disable, Enable, ForceEnable.
+    - `#!json "antiAliasing": 0/2/4/8`
+    - `#!json "pixelLightCount": int`
+    - `#!json "realtimeReflectionProbes": 0/1` Bool
+    - `#!json "shadowCascades": 0/2/4`
+    - `#!json "shadowDistance": float`
+    - `#!json "shadowmaskMode": 0/1` Shadowmask, DistanceShadowmask
+    - `#!json "shadowNearPlaneOffset": float`
+    - `#!json "shadowProjection": 0/1` CloseFit, StableFit
+    - `#!json "shadowResolution": 0/1/2/3` Low, Medium, High, VeryHigh.
+    - `#!json "shadows": 0/1/2` Disable, HardOnly, All.
+    - `#!json "softParticles": 0/1` Bool
 
-`"qualitySettings"`: https://docs.unity3d.com/ScriptReference/QualitySettings.html
+- `#!json "xrSettings"`: [XRSettings](https://docs.unity3d.com/ScriptReference/XR.XRSettings.html) WARNING: Only works on 2019 versions.
+    - `#!json "useOcclusionMesh": 0/1` Bool
 
-- `"anisotropicFiltering"`: (0 - 2) Disable, Enable, ForceEnable.
-- `"antiAliasing"`: (0, 2, 4, 8)
-- `"pixelLightCount"`: (int)
-- `"realtimeReflectionProbes"`: (0, 1) Bool
-- `"shadowCascades"`: (0, 2, 4)
-- `"shadowDistance"`: (float)
-- `"shadowmaskMode"`: (0, 1) Shadowmask, DistanceShadowmask
-- `"shadowNearPlaneOffset"`: (float)
-- `"shadowProjection"`: (0, 1) CloseFit, StableFit
-- `"shadowResolution"`: (0, 1, 2, 3) Low, Medium, High, VeryHigh.
-- `"shadows"`: (0, 1, 2) Disable, HardOnly, All. WARNING: May cause random crashes, needs more investigation.
-- `"softParticles"`: (0, 1) Bool
-
-`"xrSettings"`: https://docs.unity3d.com/ScriptReference/XR.XRSettings.html
-
-- `"useOcclusionMesh"`: (0, 1) Bool WARNING: Only works on 2019 versions.
-
-```json
-// Example
-{
-  "b": 70.0,
-  "t": "SetRenderingSettings",
-  "d": {
-    "qualitySettings": {
-      "ambientLight": [0, 0, 0, 0]
+!!! example
+    ```json
+    {
+      "b": 70.0,
+      "t": "SetRenderingSettings",
+      "d": {
+        "qualitySettings": {
+          "ambientLight": [0, 0, 0, 0]
+        }
+      }
     }
-  }
-}
-```
+    ```

@@ -5,6 +5,7 @@ These are all the properties than an object can be animated by.
 ## Noodle Extensions
 
 ### offsetPosition
+
 `offsetPosition` may be used in both `AnimateTrack` and `AssignPathAnimation`
 
 Describes the position **offset** of an object. It will continue any normal movement and have this stacked on top of it.
@@ -72,6 +73,7 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
         ![AssignPathPosition](/assets/animation/PositionAssignPath.gif)
 
 ### localRotation
+
 `localRotation` may be used in both `AnimateTrack` and `AssignPathAnimation`
 
 This property describes the **local** rotation offset of an object. This means it is rotated with itself as the origin. Uses euler values. Do note that the note spawn effect will be rotated accordlingly.
@@ -150,6 +152,7 @@ Point definition: `[pitch, yaw, roll, time, (optional) easing, (optional) spline
         ![AssignPathLocalRotation](/assets/animation/LocalRotationAssignPath.gif)
 
 ### offsetWorldRotation
+
 `offsetWorldRotation` may be used in both `AnimateTrack` and `AssignPathAnimation`
 
 This property describes the **world** rotation offset of an object. This means it is rotated with *the world* as the origin. Uses euler values. Think of the 360 characteristic.
@@ -220,8 +223,8 @@ Point definition: `[pitch, yaw, roll, time, (optional) easing]`
         ```
         ![AssignPathRotation](/assets/animation/RotationAssignPath.gif)
 
-
 ### scale
+
 `scale` may be used in both `AnimateTrack` and `AssignPathAnimation`
 
 Decribes the scale of an object. This will be based off their initial size. A scale of 1 is equal to normal size, anything under is smaller, over is larger.
@@ -275,6 +278,7 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
         ![AssignPathScale](/assets/animation/ScaleAssignPath.gif)
 
 ### dissolve
+
 `dissolve` may be used in both `AnimateTrack` and `AssignPathAnimation`
 
 This property controls the dissolve effect on both notes and walls. It's the same effect that happens when things go away upon failing a song. **Keep in mind that note bodies and the note arrows have seperate dissolve properties**, see [`dissolveArrow`](#dissolvearrow)
@@ -362,6 +366,7 @@ Point definition: `[transparency, time, (optional) easing]`
         ![AssignPathDissolve](/assets/animation/DissolveAssignPath.gif)
 
 ### dissolveArrow
+
 `dissolveArrow` may be used in both `AnimateTrack` and `AssignPathAnimation`
 
 This property controls the dissolve effect on the arrows of notes. Similar to the look of the disappearing notes modifier. This property only affects notes.
@@ -424,11 +429,12 @@ Point definition: `[transparency, time, (optional) easing]`
         ![AssignPathDissolveArrow](/assets/animation/DissolveArrowAssignPath.gif)
 
 ### interactable
+
 `interactable` may be used in both `AnimateTrack` and `AssignPathAnimation`
 
 This property controls whether or not the player can interact with the note/wall.
 
-`interactable` either is or isn't, there is no inbetween. When great than or equal to `1`, the object can fully be interacted with. When less than `1`, the object cannot be interacted with at all.
+`interactable` either is or isn't, there is no in-between. When great than or equal to `1`, the object can fully be interacted with. When less than `1`, the object cannot be interacted with at all.
 
 Multiple of this property will be multiplied together.
 
@@ -438,6 +444,7 @@ Point definition: `[interactable, time, (optional) easing]`
     This is where I would put my example, IF I HAD ANY!
 
 ### definitePosition
+
 `definitePosition` may only be used in `AssignPathAnimation`
 
 Describes the **definite** position of an object. Will completely overwrite the object's default movement. However, this does still take into account x/y and world rotation.
@@ -488,9 +495,10 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
     ![AssignPathDefinitePosition](/assets/animation/DefinitePositionAnimateTrack.gif)
 
 ### time
+
 `time` may only be used in `AnimateTrack`
 
-`time` is relatively advanced so make sure to have a solid understanding of Noodle Extensions before delving into time. `time` can only be used in [AnimateTrack](#AnimateTrack) as it lets you control what point in the note's "lifespan" it is at a given time.
+`time` is relatively advanced so make sure to have a solid understanding of Noodle Extensions before delving into time. `time` can only be used in AnimateTrack as it lets you control what point in the note's "lifespan" it is at a given time.
 
 ``` { .json .copy }
 [
@@ -504,13 +512,16 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
 It is worth noting that every object on one track will get the same time values when animating this property. This means they would suddenly appear to all be at the same point. **It is recommended for every object to have its own track when using `_time`**
 
 Say you want a time AnimateTrack on an object that will make it behave normally for starters. You want the AnimateTrack to start *right when the object spawns*, meaning `_time-halfJumpDurationInBeats` of the object. It's duration should be `halfJumpJurationInBeats*2`. With this, the point definition of
+
 ``` { .json .copy }
 [
   [0, 0],
   [1, 1]
 ]
 ```
+
 would behave as normal.
+
 ``` { .json .copy }
 [
   [0, 0],
@@ -520,6 +531,7 @@ would behave as normal.
   [1, 1]
 ]
 ```
+
 would appear to go forwards, then backwards.
 
 !!! note
@@ -559,6 +571,7 @@ Point definition: `[time, time, (optional) easing]`
 ## Chroma
 
 ### color
+
 `color` may be used in both `AnimateTrack` and `AssignPathAnimation`
 
 Describes the color of an object. Will override any other color the object may have had.

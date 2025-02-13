@@ -104,7 +104,7 @@ a built asset bundle.
 Bundles should be placed in your map folder and called either `bundleWindows2019.vivify`, `bundleWindows2021.vivify`. Although Quest
 support does not exist yet, bundles should still be built for them and be called `bundleAndroid2021.vivify`.
 
-```
+```text
 Map Folder
 ├── bundleWindows2019.vivify
 ├── bundleWindows2021.vivify

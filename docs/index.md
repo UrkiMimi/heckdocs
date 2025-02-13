@@ -11,6 +11,6 @@ These mods are all about giving the mapper more power to make amazing maps! Thes
 Join the Discord here: [https://discord.gg/rrZf3kapeh](https://discord.gg/rrZf3kapeh)
 
 !!! note
-    This documentation is NOT a tutorial for mapping, json editting, or scripting. Instead, it lists all the features within all of the mods and their respective syntax.
+    This documentation is NOT a tutorial for mapping, json editing, or scripting. Instead, it lists all the features within all of the mods and their respective syntax.
 
 Ready? Visit [Getting Started](getting-started.md).

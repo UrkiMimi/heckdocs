@@ -3,6 +3,7 @@
 Tracks and point definitions are integral to Heck's animation systems and are used for animating anything using Heck.
 
 ## Tracks
+
 **Tracks** are a powerful tool integrated by Heck that allow you to group objects together and control them. Tracks hold information in the form of properties, then anything on the track can use that information to control, for example, their position or rotation.
 
 `track` is a string property in the `customData` of the object you want to give said track to. It can be placed on any object in the `obstacles`, `colorNotes`, `bombNotes`, `sliders`, or `burstSliders` arrays. An object can belong to multiple tracks at the same time, and be affected by multiple track animations or path animations concurrently.
@@ -25,9 +26,11 @@ Tracks and point definitions are integral to Heck's animation systems and are us
     ```
 
 ## Point Definitions
+
 **Point definitions** are used to describe what happens over the course of an animation, they are used *slightly differently for different properties*. They consist of a collection of points over time.
 
 Here is an example of one being defined to animate [`offsetPosition`](AnimationProperties/#offsetPosition): (See: [AnimateTrack](#animatetrack))
+
 ```json
 {
   "b": 3.0,
@@ -44,6 +47,7 @@ Here is an example of one being defined to animate [`offsetPosition`](AnimationP
   }
 }
 ```
+
 A point definition usually follows the pattern of `[data, time, optional easing, optional spline]`,
 
 - Data can be multiple points of data, this part of a point varies per property,
@@ -52,6 +56,7 @@ A point definition usually follows the pattern of `[data, time, optional easing,
 - "optional spline" is an optional field, with any spline implemented, currently only `"splineCatmullRom"`. It acts like easings, affecting the movement from the last point to the one with the spline on it. Currently only positions and rotations support splines.
 ??? example
     Splines and easings being used
+
     ```json
     "offsetPosition": [
       [0, 0, 0, 0],
@@ -60,6 +65,7 @@ A point definition usually follows the pattern of `[data, time, optional easing,
       [5, -2, -1, 1, "easeOutCubic", "splineCatmullRom"]
     ]
     ```
+
 !!! warning
     Point definitions are **strict** in the amount of points you provide them, i.e. you must provide them the exact amount of values they expect. For example, when animating a color, a point must have 5 numbers total, RGBA and time. Any less or any more will cause an error.
     ```json
@@ -131,6 +137,7 @@ When a point definition is used, input time values outside of the defined points
     ```
 
 ### Path Animation
+
 **Path animations** define how an object is animated over its own individual lifetime. For path animations, the time value of the point definition is the point each object on the track is at in its individual life span.
 
 Meaning a point with time `0` would be right when the object finishes jumping in, a point with time `0.5` would be when the object reaches the player, at `0.75`, walls and notes will begin their despawn animation and start flying away very quickly, and `1` being right when the object despawns.
@@ -141,6 +148,7 @@ Meaning a point with time `0` would be right when the object finishes jumping in
     Objects cannot be animated while they are in their jumping animation. During that time, they will instead strictly use the first point in the point definition.
 
 #### Individual path animations
+
 Path animations can individual be assigned to an object by adding the `animation` data in the `customData`.
 
 This will apply a path animation to the single object. Will overwrite any path animation assigned through [`AssignPathAnimation`](#assignpathanimation)
@@ -168,6 +176,7 @@ This will apply a path animation to the single object. Will overwrite any path a
 These custom events are the primary ways of animating.
 
 #### AnimateTrack
+
 ```json
 {
   "b": float, // Time in beats.
@@ -213,6 +222,7 @@ Although not recommended, properties can be set to `null` to "erase" a track's p
     The track(s) being affected **must exist**. That is, the track must have at least one object on it, such as a note or a prefab. If the track does not exist, the event will error. This is true for *any* event which uses tracks, not just `AnimateTrack`.
 
 #### AssignPathAnimation
+
 ```json
 {
   "b": float, // Time in beats.
@@ -225,6 +235,7 @@ Although not recommended, properties can be set to `null` to "erase" a track's p
   }
 }
 ```
+
 **`AssignPathAnimation`** will assign a "path animation" to all the objects on the track(s).
 
 The duration and easing on the event additionally allows you to transition smoothly between paths.
@@ -286,6 +297,7 @@ The true value of modifiers are useful when using **base properties** which allo
     The first event takes the color of left hand notes, then multiplies their rgb values by 0.4.
 
     The second event just uses the right hand note color.
+
     ```json
     {
       "b": -1,
@@ -304,6 +316,7 @@ The true value of modifiers are useful when using **base properties** which allo
       }
     }
     ```
+
 #### Bases
 
 Base properties represent a set amount of values and are continously updated.

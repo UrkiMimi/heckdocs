@@ -8,9 +8,10 @@ Additionally, other mod developers can add compatibility to have their mod integ
     Although all settings are included for posterity's sake, it is *HIGHLY* recommended to only list settings you *NEED*, e.g. your map uses a lot of text and left handed mode needs to be disabled to not mirror your text. Keep it to the bare minimum!
 
 ## Adding recommended settings
-*  `"_customData"` -> `"_settings"`
-  *  `category`: The category your setting belongs to. See below for category names.
-    *  `setting name`: The name of your setting. See below for setting names.
+
+* `"_customData"` -> `"_settings"`
+    * `category`: The category your setting belongs to. See below for category names.
+        * `setting name`: The name of your setting. See below for setting names.
 
 Custom data for settable settings is set in the info.dat.
 !!! example
@@ -51,7 +52,8 @@ Custom data for settable settings is set in the info.dat.
 
 ## Categories
 
-#### Vanilla
+### Vanilla
+
 These settings are implemented by default.
 
 * `#!json "_playerOptions"`
@@ -65,7 +67,7 @@ These settings are implemented by default.
     * `#!json "_advancedHud": bool`
     * `#!json "_autoRestart": bool`
     * `#!json "_saberTrailIntensity": float`
-    * `#!json "_noteJumpDurationTypeSettings": Dynamic, Static`
+    * `#!json "_noteJumpDurationTypeSettings": "Dynamic"/"Static"`
     * `#!json "_noteJumpFixedDuration": float` *Only available w/ "Static"*
     * `#!json "_noteJumpStartBeatOffset": float` *Only available w/ "Dynamic"*,
         * Close: `-0.5`
@@ -75,20 +77,20 @@ These settings are implemented by default.
         * Far: `0.5`
     * `#!json "_hideNoteSpawnEffect": bool`
     * `#!json "_adaptiveSfx": bool`
-    * `#!json "_environmentEffectsFilterDefaultPreset": AllEffects, StrobeFilter, NoEffects`
-    * `#!json "_environmentEffectsFilterExpertPlusPreset": AllEffects, StrobeFilter, NoEffects`
+    * `#!json "_environmentEffectsFilterDefaultPreset": "AllEffects"/"StrobeFilter"/"NoEffects"`
+    * `#!json "_environmentEffectsFilterExpertPlusPreset": "AllEffects"/"StrobeFilter"/"NoEffects"`
 * `#!json "_modifiers"`
     * `#!json "_energyType": Bar, Battery`
     * `#!json "_noFailOn0Energy": bool`
     * `#!json "_instaFail": bool`
     * `#!json "_failOnSaberClash": bool` Hidden setting: *Instantly fails player when sabers clash.*
-    * `#!json "_enabledObstacleType": All, FullHeightOnly, NoObstacles` *The `"FullHeightOnly"` option is a hidden setting and disables crouch walls.*
+    * `#!json "_enabledObstacleType": "All"/"FullHeightOnly"/"NoObstacles"` *The `"FullHeightOnly"` option is a hidden setting and disables crouch walls.*
     * `#!json "_fastNotes": bool` Hidden setting: *Forces NJS to 20.*
     * `#!json "_strictAngles": bool`
     * `#!json "_disappearingArrows": bool`
     * `#!json "_ghostNotes": bool`
     * `#!json "_noBombs": bool`
-    * `#!json "_songSpeed": Normal, Faster, Slower, SuperFast`
+    * `#!json "_songSpeed": "Normal"/"Faster"/"Slower"/"SuperFast"`
     * `#!json "_noArrows": bool`
     * `#!json "_proMode": bool`
     * `#!json "_zenMode": bool`
@@ -105,7 +107,8 @@ These settings are implemented by default.
     * `#!json "_screenDisplacementEffectsEnabled": bool`
     * `#!json "_maxShockwaveParticles": int (0 - 2)`
 
-#### Chroma
+### Chroma
+
 * `#!json "_chroma"`
     * `#!json "_disableChromaEvents": bool`
     * `#!json "_disableEnvironmentEnhancements": bool`
@@ -113,12 +116,13 @@ These settings are implemented by default.
     * `#!json "_forceZenModeWalls": bool`
 
 ### Other Mods
+
 There are a handful of other mods with support for Settings Setter as well.
 Main properties for these will be provided here, and the full list of available settings will be linked alongside if required.
 
 #### Counters+
 
-Full property list with things like HUD offsets, size, colours, etc can be found on the [Counters+ Wiki](https://github.com/NuggoDEV/CountersPlus/wiki/For-Developers#heck-integration).
+Full property list with things like HUD offsets, size, colors, etc can be found on the [Counters+ Wiki](https://github.com/NuggoDEV/CountersPlus/wiki/For-Developers#heck-integration).
 
 * `#!json "_countersPlus"`
     * `#!json "_mainEnabled": bool`

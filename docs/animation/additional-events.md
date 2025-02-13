@@ -3,21 +3,25 @@
 These are additional custom events that use tracks and point definitions.
 
 ## Noodle Extensions
+
 ### AssignTrackParent
+
 ```json
 {
   "b": float, // Time in beats.
   "t": "AssignTrackParent",
   "d": {
-    "childrenTracks": [string], // Array of tracks to parent to _parentTrack.
+    "childrenTracks": string[], // Array of tracks to parent to _parentTrack.
     "parentTrack": string, // The track you want to animate.
     "worldPositionStays": bool // Defaults to false if not set. See https://docs.unity3d.com/ScriptReference/Transform.SetParent.html
   }
 }
 ```
+
 **`AssignTrackParent`** will create an new GameObject with a [TransformController](/environment/environment/#transformcontroller) and parent any number of children tracks to it.
 
 ### AssignPlayerToTrack
+
 ```json
 {
   "b": float, // Time in beats.
@@ -28,6 +32,7 @@ These are additional custom events that use tracks and point definitions.
   }
 }
 ```
+
 **`AssignPlayerToTrack`** will assign the player a [TransformController](/environment/environment/#transformcontroller).
 Available targets are `Root`, `Head`, `LeftHand`, and `RightHand`.
 
@@ -37,7 +42,9 @@ Available targets are `Root`, `Head`, `LeftHand`, and `RightHand`.
     To clarify, it is very easy to make people motion sick with player tracks, please use them carefully and sparingly.
 
 ## Chroma
+
 ### AnimateComponent
+
 ```json
 {
   "b": float, // Time in beats.
@@ -52,6 +59,7 @@ Available targets are `Root`, `Head`, `LeftHand`, and `RightHand`.
   }
 }
 ```
+
 **`AnimateComponent`** allows for animating [components](/environment/environment/#components). Animating fog [demo](https://streamable.com/d1ztwq).
 
 !!! example

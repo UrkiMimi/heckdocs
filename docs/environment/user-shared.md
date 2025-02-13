@@ -10,6 +10,7 @@ After creating a custom environment, they can be turned into a shareable standal
 Other user's environments can be found in the heck Discord in the #environments channel, feel free to share your own in there as well!
 
 ## Structure
+
 ``` { .json .copy }
 {
   "version": "1.0.0", // must be 1.0.0 to work
@@ -38,6 +39,7 @@ Other user's environments can be found in the heck Discord in the #environments 
 ```
 
 ### Features
+
 * `#!json "useChromaEvents": true` Forces Chroma to load its features such as rgb lights and light ids.
-* `#!json "forceEffectsFilter": "AllEffects", "StrobeFilter", "NoEffects"` Forces the effects filter option to a specific preset.
+* `#!json "forceEffectsFilter": "AllEffects"/"StrobeFilter"/"NoEffects"` Forces the effects filter option to a specific preset.
 * `#!json "basicBeatmapEvents": []` Loads basic lighting events into the map.

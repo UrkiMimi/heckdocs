@@ -87,7 +87,8 @@ Additionally, pressing your reload key while in the practice menu where you sele
 Unfortunately, environments changes through Chroma cannot be hot ReLoaded™ while in-game, so to help with that, there is an additional `"ReloadOnRestart"` option with in the config that will automatically reload the JSON whenever you restart the map.
 
 === ":octicons-file-code-16: `UserData/Heck.json`"
-  ``` json hl_lines="5"
+
+  ```json hl_lines="5"
   {
     "ReLoader": {
       "JumpToSavedTime": "Space",

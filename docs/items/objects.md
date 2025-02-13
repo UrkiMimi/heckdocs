@@ -29,7 +29,7 @@ Noodle Extensions and Chroma provide simple data you can add to any note or wall
 
 ## Noodle Extensions
 
-#### Fake Objects
+### Fake Objects
 
 If you wish to create **fake notes** (notes that do not show up in the note count and not count towards score in any way), you must place them in a separate array within `customData`. These arrays are called `fakeColorNotes`, `fakeBombNotes`, `fakeObstacles` and `fakeBurstSliders`.
 
@@ -49,6 +49,7 @@ If you wish to create **fake notes** (notes that do not show up in the note coun
     ```
 
 ### All Objects
+
 * `#!json "coordinates": [x, y]` (floats) Should be self explanatory. Will override `x` and `y` NOTE: All positions are based off the [Beatwalls system](/assets/items/beatwallsgrid.png).
 !!! note
     When sorting your notes, e.g. in a map parsing script, sort by `coordinates`, not `x` (line index) and `y` (line layer).
@@ -60,7 +61,8 @@ If you wish to create **fake notes** (notes that do not show up in the note coun
 * `#!json "uninteractable": bool` When true, the note/wall cannot be interacted with. This means notes cannot be cut and walls will not interact with sabers/putting your head in the wall. Notes will still count towards your score.
 
 ### Notes
-* `#!json "flip": [flip line index, flip jump]` (floats) Flip notes from an initial spawn position to its true position. [PREVIEW](https://streamable.com/9o2puz) (Map by AaltopahWi). Flip line index is the initial `x` the note will spawn at and flip jump is how high (or low) the note will jump up (or down) when flipping to its true position. Base game behaviour will set one note's flip jump to -1 and the other to 1.
+
+* `#!json "flip": [flip line index, flip jump]` (floats) Flip notes from an initial spawn position to its true position. [PREVIEW](https://streamable.com/9o2puz) (Map by AaltopahWi). Flip line index is the initial `x` the note will spawn at and flip jump is how high (or low) the note will jump up (or down) when flipping to its true position. Base game behavior will set one note's flip jump to -1 and the other to 1.
 * `#!json "disableNoteGravity": bool` When true, notes will no longer do [their animation where they float up](https://streamable.com/28rqhy).
 * `#!json "disableNoteLook": bool` When true, notes will no longer rotate towards the player.
 * `#!json "disableBadCutDirection": bool` When true, the note cannot be cut from wrong direction.
@@ -69,9 +71,11 @@ If you wish to create **fake notes** (notes that do not show up in the note coun
 * `#!json "link": string` When cut, all notes with the same link string will also be cut.
 
 ### Obstacles
+
 * `#!json "size": [w, h, l]` (floats) Width, height and length of the wall. `#!json "size": [1, 1, 1]` will be perfectly square. While `d` (duration) will still control the lifetime, the length of the wall will be controlled by `size` instead.
 
 ### Sliders
+
 * `#!json "disableNoteGravity": bool` See above.
 * `#!json "tailCoordinates": [x, y]` (floats) `coordinates`, but for the tail.
 
@@ -91,10 +95,12 @@ If you wish to create **fake notes** (notes that do not show up in the note coun
 ## Chroma
 
 ### All Objects
+
 * `#!json "color": [r, g, b, a]` (floats) Array of RGB values (Alpha is optional and will default to 1 if not specified).
 !!! note
     All RGBA values are on a 0-1 scale, not a 0-255 scale.
 
 ### Notes
+
 * `#!json "spawnEffect": bool` Set to false and the note spawn effect will be hidden. True and the note spawn effect will spawn regardless of player setting.
 * `#!json "disableNoteDebris": bool` When true, cutting the note spawns will not debris.
