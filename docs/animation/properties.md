@@ -284,7 +284,7 @@ Point definition: `[x, y, z, time, (optional) easing, (optional) spline]`
 This property controls the dissolve effect on both notes and walls. It's the same effect that happens when things go away upon failing a song. **Keep in mind that note bodies and the note arrows have seperate dissolve properties**, see [`dissolveArrow`](#dissolvearrow)
 
 !!! note
-    How this effect looks will depend on the player's graphics settings. Lower graphics settings may instead see the note scaling up from 0, rather than the cutout effect.
+    How this effect looks will depend on the player's "Bloom Post Process" effect. Lower graphics settings may instead see the note scaling up from 0, rather than the cutout effect.
 
 `0` is fully transparent and `1` is fully opaque.
 
