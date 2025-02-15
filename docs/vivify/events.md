@@ -8,8 +8,8 @@ Custom events added by Vivify.
 
 - **Texture**: Must be a string that is a direct path file to a texture.
 - **Float**: May either be a direct value (`#!json "value": 10.4`) or a point definition (`#!json "value": [[0,0], [10, 1]]`).
-- **Color**: May either be an RGBA array (`#!json "value": [0, 1, 0]`) or a point definition (`#!json "value": [1, 0, 0, 0, 0.2], [0, 0, 1, 0, 0.6]`).
-- **Vector**: May either be an array (`#!json "value": [0, 1, 0]`) or a point definition (`#!json "value": [1, 0, 0, 0, 0.2], [0, 0, 1, 0, 0.6]`).
+- **Color**: May either be an RGBA array (`#!json "value": [0, 1, 0, (optional) 1]`) or a point definition (`#!json "value": [1, 0, 0, 0, 0.2], [0, 0, 1, 0, 0.6]`).
+- **Vector**: May either be an array (`#!json "value": [0, 1, 0, 1]`) or a point definition (`#!json "value": [1, 0, 0, 0, 0.2], [0, 0, 1, 0, 0.6]`).
 - **Keyword**: May either be a direct value (`#!json "value": true`) or a point definition (`#!json "value": [[0,0], [1, 1]]`) where values equal to or greater than 1 will enable the keyword.
 
 !!! example
